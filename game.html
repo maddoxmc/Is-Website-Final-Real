@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horse Trivia Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+    <!-- Navigation -->
+    <nav class="navbar" style="position: relative;">
+        <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+            <a href="index.html" class="logo">Maddox<span class="text-gradient">McNeill</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="resume.html">Resume</a>
+                <a href="scratch.html">Hobbies</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container"
+        style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; max-width: 600px;">
+
+        <h1 class="text-gradient" style="margin-bottom: 2rem; font-size: 3rem;">Horse Trivia Challenge</h1>
+
+        <div class="card" style="width: 100%; border: 1px solid var(--primary-color);">
+            <div id="riddleDisplay"
+                style="font-size: 1.5rem; margin-bottom: 2rem; min-height: 80px; display: flex; align-items: center; justify-content: center;">
+                Click "New Question" to start!
+            </div>
+
+            <div id="answerDisplay"
+                style="display: none; background: rgba(56, 189, 248, 0.1); padding: 1rem; border-radius: 10px; margin-bottom: 2rem; color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button id="newRiddleBtn" class="btn btn-primary">New Question</button>
+                <button id="revealBtn" class="btn btn-secondary" disabled>Reveal Answer</button>
+            </div>
+        </div>
+
+        <a href="scratch.html" style="margin-top: 2rem; color: var(--text-muted);">&larr; Back to Hobbies</a>
+
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: auto;">
+        <div class="container">
+            <p>&copy; 2025 Maddox McNeill. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const riddles = [
+            { q: "I have a frog but no pond. What am I?", a: "A Horse's Hoof" },
+            { q: "I am measured in hands, but I have no fingers. What am I?", a: "A Height of a Horse" },
+            { q: "I wear shoes but have no feet. What am I?", a: "A Horse (Horseshoes)" },
+            { q: "You can lead me to water, but you can't make me drink. What am I?", a: "A Horse" },
+            { q: "I have a bit but no bytes. What am I?", a: "A Bridle" },
+            { q: "I am a breed known for my spots. What am I?", a: "Appaloosa" },
+            { q: "I am the fastest gait of a horse. What am I?", a: "The Gallop" }
+        ];
+
+        const riddleDisplay = document.getElementById('riddleDisplay');
+        const answerDisplay = document.getElementById('answerDisplay');
+        const newRiddleBtn = document.getElementById('newRiddleBtn');
+        const revealBtn = document.getElementById('revealBtn');
+
+        let currentRiddle = null;
+
+        newRiddleBtn.addEventListener('click', () => {
+            // Get random riddle
+            const randomIndex = Math.floor(Math.random() * riddles.length);
+            currentRiddle = riddles[randomIndex];
+
+            // Update UI
+            riddleDisplay.innerText = currentRiddle.q;
+            answerDisplay.style.display = 'none';
+            revealBtn.disabled = false;
+        });
+
+        revealBtn.addEventListener('click', () => {
+            if (!currentRiddle) return;
+
+            // Show answer
+            answerDisplay.innerText = currentRiddle.a;
+            answerDisplay.style.display = 'block';
+            revealBtn.disabled = true;
+        });
+    </script>
+</body>
+
+</html>
